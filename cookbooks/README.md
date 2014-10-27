@@ -1,54 +1,92 @@
-This directory contains the cookbooks used to configure systems in your infrastructure with Chef.
+Description
+============
+TODO: Enter the cookbook description here.
 
-Knife needs to be configured to know where the cookbooks are located with the `cookbook_path` setting. If this is not set, then several cookbook operations will fail to work properly.
+e.g.
+This cookbook makes your favorite breakfast sandwhich.
 
-    cookbook_path ["./cookbooks"]
+Requirements
+------------
+TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-This setting tells knife to look for the cookbooks directory in the present working directory. This means the knife cookbook subcommands need to be run in the `chef-repo` directory itself. To make sure that the cookbooks can be found elsewhere inside the repository, use an absolute path. This is a Ruby file, so something like the following can be used:
+e.g.
+#### packages
+- `toaster` - foo needs toaster to brown your bagel.
 
-    current_dir = File.dirname(__FILE__)
-    cookbook_path ["#{current_dir}/../cookbooks"]
+Attributes
+----------
+TODO: List you cookbook attributes here.
 
-Which will set `current_dir` to the location of the knife.rb file itself (e.g. `~/chef-repo/.chef/knife.rb`).
+e.g.
+#### foo::default
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['foo']['bacon']</tt></td>
+    <td>Boolean</td>
+    <td>whether to include bacon</td>
+    <td><tt>true</tt></td>
+  </tr>
+</table>
 
-Configure knife to use your preferred copyright holder, email contact and license. Add the following lines to `.chef/knife.rb`.
+Usage
+-----
+#### foo::default
+TODO: Write usage instructions for each cookbook.
 
-    cookbook_copyright "Example, Com."
-    cookbook_email     "cookbooks@example.com"
-    cookbook_license   "apachev2"
+e.g.
+Just include `foo` in your node's `run_list`:
 
-Supported values for `cookbook_license` are "apachev2", "mit","gplv2","gplv3",  or "none". These settings are used to prefill comments in the default recipe, and the corresponding values in the metadata.rb. You are free to change the the comments in those files.
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[foo]"
+  ]
+}
+```
 
-Create new cookbooks in this directory with Knife.
+Contributing
+------------
+TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
-    knife cookbook create COOKBOOK
+e.g.
+1. Fork the repository on Github
+2. Create a named feature branch (like `add_component_x`)
+3. Write you change
+4. Write tests for your change (if applicable)
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request using Github
 
-This will create all the cookbook directory components. You don't need to use them all, and can delete the ones you don't need. It also creates a README file, metadata.rb and default recipe.
+Testing
+=====
 
-You can also download cookbooks directly from the Opscode Cookbook Site. There are two subcommands to help with this depending on what your preference is.
+This cookbook is using [ChefSpec](https://github.com/acrmp/chefspec) for
+testing. Run the following before commiting. It will run your tests,
+and check for lint errors.
 
-The first and recommended method is to use a vendor branch if you're using Git. This is automatically handled with Knife.
+    % ./run_tests.bash
 
-    knife cookbook site install COOKBOOK
+License and Author
+==================
 
-This will:
+Author:: Changbin Liu (<changbin.liu@gmail.com>)
 
-* Download the cookbook tarball from cookbooks.opscode.com.
-* Ensure its on the git master branch.
-* Checks for an existing vendor branch, and creates if it doesn't.
-* Checks out the vendor branch (chef-vendor-COOKBOOK).
-* Removes the existing (old) version.
-* Untars the cookbook tarball it downloaded in the first step.
-* Adds the cookbook files to the git index and commits.
-* Creates a tag for the version downloaded.
-* Checks out the master branch again.
-* Merges the cookbook into master.
-* Repeats the above for all the cookbooks dependencies, downloading them from the community site
+Copyright 2013, AT&T Services, Inc.
 
-The last step will ensure that any local changes or modifications you have made to the cookbook are preserved, so you can keep your changes through upstream updates.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-If you're not using Git, use the site download subcommand to download the tarball.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-    knife cookbook site download COOKBOOK
-
-This creates the COOKBOOK.tar.gz from in the current directory (e.g., `~/chef-repo`). We recommend following a workflow similar to the above for your version control tool.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
